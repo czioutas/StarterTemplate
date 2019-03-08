@@ -1,0 +1,9 @@
+language: csharp
+solution: StarterTemplate.sln
+mono: none
+dotnet: 2.2.101
+os: linux
+dist: xenial
+script:
+ - dotnet restore
+ - dotnet build
