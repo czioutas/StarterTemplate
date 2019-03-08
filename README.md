@@ -9,8 +9,8 @@ This repository aims to provide enhanced features for web api templates in order
 ## Features
 
 - MVC & Service & Repository pattern
-- Auto-Discover & Register of Services, Repositories
+- AutoDiscover for Services, Repositories, APIClients
 - Examples for usage of the pre-mentioned patterns
 - BaseModel for extension
 - EF Core with base and abstraction level to use different ORM
-
+- Basic Usage of IHttpClientFactory
