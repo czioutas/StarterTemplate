@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using StarterTemplate.Application;
+﻿using StarterTemplate.Application;
 using StarterTemplate.Models;
 using StarterTemplate.Repositories.Contracts;
 using StarterTemplate.Services.Contracts;
+using System.Threading.Tasks;
 
 namespace StarterTemplate.Services
 {
@@ -13,7 +13,6 @@ namespace StarterTemplate.Services
         public ExampleService(IExampleRepository exampleRepository)
         {
             _exampleRepository = exampleRepository;
-            
         }
 
         public async Task<bool> IsItATeaPotAsync(ExampleModel model)

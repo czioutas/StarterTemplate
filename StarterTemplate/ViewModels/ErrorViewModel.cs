@@ -1,5 +1,3 @@
-using System;
-
 namespace StarterTemplate.ViewModels
 {
     public class ErrorViewModel

@@ -21,7 +21,6 @@ namespace StarterTemplate.Data.Seed
         /// <returns></returns>
         public virtual async Task AddSeedData(ApplicationDbContext context)
         {
-
         }
     }
 }

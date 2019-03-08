@@ -10,10 +10,9 @@ namespace StarterTemplate.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
         {
-
         }
 
-        public DbSet<ExampleModel> Example{ get; set; }
+        public DbSet<ExampleModel> Example { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

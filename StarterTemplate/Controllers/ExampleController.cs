@@ -15,7 +15,6 @@ namespace StarterTemplate.Controllers
             _exampleService = exampleService;
         }
 
-
         [HttpGet("{id}/", Name = "IsItATeaPot")]
         public async Task<IActionResult> IsItATeaPot(int Id)
         {

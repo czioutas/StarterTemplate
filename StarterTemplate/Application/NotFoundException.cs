@@ -6,7 +6,7 @@
         /// Parameter-less constructor
         ///</Summary>
         public NotFoundException() { }
-        
+
         ///<Summary>
         /// Message only constructor
         ///</Summary>

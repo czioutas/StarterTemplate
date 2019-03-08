@@ -19,6 +19,6 @@ namespace StarterTemplate.Controllers
         {
             // here you can check for DB Connection for example if needed.
             return Ok(_hbSettings.Response);
-        }      
+        }
     }
 }
