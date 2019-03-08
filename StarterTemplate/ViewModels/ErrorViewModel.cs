@@ -1,6 +1,6 @@
 using System;
 
-namespace StarterTemplate.Models
+namespace StarterTemplate.ViewModels
 {
     public class ErrorViewModel
     {
