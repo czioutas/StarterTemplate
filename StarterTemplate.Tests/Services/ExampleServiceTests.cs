@@ -22,6 +22,9 @@ namespace StarterTemplate.Tests.Services
             _exampleService = new ExampleService(_exampleRepository.Object);
         }
 
+        /// <summary>
+        /// We check if the service when targeting an ExampleModel with Name "teapot" validates that it is a teapot correctly
+        /// </summary>
         [Fact]
         public async Task IsItATeaPotAsync_True()
         {
@@ -32,6 +35,9 @@ namespace StarterTemplate.Tests.Services
             Assert.True(result);
         }
 
+        /// <summary>
+        /// We check if the service when targeting an ExampleModel with Name other than "teapot" validates that it is not a teapot
+        /// </summary>
         [Fact]
         public async Task IsItATeaPotAsync_False()
         {
@@ -42,6 +48,9 @@ namespace StarterTemplate.Tests.Services
             Assert.False(result);
         }
 
+        /// <summary>
+        /// We check if the service when not finding the needed model, throws a proper NotFound Exception
+        /// </summary>
         [Fact]
         public async Task IsItATeaPotAsync_NotFound()
         {
