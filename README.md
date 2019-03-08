@@ -9,6 +9,7 @@ This repository aims to provide enhanced features for web api templates in order
 ## Features
 
 - MVC & Service & Repository pattern
+- Test Suit as Example
 - AutoDiscover for Services, Repositories, APIClients
 - Examples for usage of the pre-mentioned patterns
 - BaseModel for extension
