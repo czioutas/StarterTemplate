@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StarterTemplate.APIs.ChuckNorrisIO;
 using StarterTemplate.Application;
 using StarterTemplate.Services.Contracts;
 using System.Threading.Tasks;
@@ -9,10 +10,12 @@ namespace StarterTemplate.Controllers
     public class ExampleController : Controller
     {
         private readonly IExampleService _exampleService;
+        private readonly IChuckNorrisAPIClient _chuckNorrisAPIClient;
 
-        public ExampleController(IExampleService exampleService)
+        public ExampleController(IExampleService exampleService, IChuckNorrisAPIClient chuckNorrisAPIClient)
         {
             _exampleService = exampleService;
+            _chuckNorrisAPIClient = chuckNorrisAPIClient;
         }
 
         [HttpGet("{id}/", Name = "IsItATeaPot")]
@@ -27,6 +30,12 @@ namespace StarterTemplate.Controllers
             {
                 return NotFound();
             }
+        }
+
+        [HttpGet(Name = "GetChuckNorrisJoke")]
+        public async Task<IActionResult> Joke()
+        {
+            return Ok(await _chuckNorrisAPIClient.GetJokeAsync());
         }
     }
 }

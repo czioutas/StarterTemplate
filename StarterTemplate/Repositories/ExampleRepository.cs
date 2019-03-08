@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace StarterTemplate.Repositories
 {
-    public class ExampleRepository : BaseRepository<ExampleModel>, IExampleRepository
+    public class ExampleRepository : BaseRepository<ExampleModel>, IExampleRepository, ITransientRepositoryInterface
     {
         public ExampleRepository(ApplicationDbContext _context) : base(_context)
         {

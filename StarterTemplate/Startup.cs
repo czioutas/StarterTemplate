@@ -61,6 +61,7 @@ namespace StarterTemplate
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddHttpClient();
             StartupExtensions.AutoDiscover(services, Configuration);
 
             services.Configure<GzipCompressionProviderOptions>(options => options.Level = System.IO.Compression.CompressionLevel.Optimal);

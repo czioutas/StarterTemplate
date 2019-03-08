@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using StarterTemplate.Settings;
+using StarterTemplate.Repositories.Contracts;
 
 namespace StarterTemplate
 {
@@ -15,9 +16,26 @@ namespace StarterTemplate
         
         public static void AutoDiscover(IServiceCollection services, IConfiguration configuration)
         {
+            SetupAPIs(services);
             SetupRepositories(services);
             SetupServices(services);
             SetupSettingsModels(services, configuration);
+        }
+
+        private static void SetupAPIs(IServiceCollection services)
+        {
+            IEnumerable<Type> allApi = Assembly.GetEntryAssembly().GetTypes().
+                                Where(a => a.GetTypeInfo().IsClass &&
+                                        a.Namespace != null &&
+                                        a.Namespace.Contains($"{BaseNameSpace}.APIs") &&
+                                        a.Name.EndsWith("APIClient"));
+
+            foreach (Type apiClient in allApi)
+            {
+                Type mainInterface = apiClient.GetInterfaces().First();
+
+                services.AddScoped(mainInterface, apiClient);
+            }
         }
 
         private static void SetupServices(IServiceCollection services)
@@ -29,43 +47,42 @@ namespace StarterTemplate
                                         s.Name.EndsWith("Service"));
 
             foreach (Type service in allServices)
-            {                
+            {
+                Type mainInterface = service.GetInterfaces()
+                    .Where(t => t.AssemblyQualifiedName != typeof(ITransientServiceInterface).AssemblyQualifiedName)
+                    .First();
+
                 if (service.GetInterfaces().Contains(typeof(ITransientServiceInterface)))
                 {
-                    Type mainInterface = service.GetInterfaces()
-                    .Where(t => t.AssemblyQualifiedName != typeof(ITransientServiceInterface).AssemblyQualifiedName).First();
-
                     services.AddTransient(mainInterface, service);
                 }
-                else if (service.GetInterfaces().Count() == 0)
+                else
                 {
-                    services.AddScoped(service);
+                    services.AddScoped(mainInterface, service);
                 }
             }
         }
 
         private static void SetupRepositories(IServiceCollection services)
         {
-            IEnumerable<Type> allRepositories = Assembly.GetEntryAssembly().GetTypes().
-                                Where(r => r.GetTypeInfo().IsClass &&
-                                        r.Namespace != null &&
-                                        r.Namespace.Contains($"{BaseNameSpace}.Repository") &&
-                                        r.Name.EndsWith("Repository"));
+            IEnumerable<Type> allRepositores = Assembly.GetEntryAssembly().GetTypes()
+                .Where(a => a.GetTypeInfo().IsClass &&
+                    a.Namespace != null &&
+                    a.Namespace.Contains($"{BaseNameSpace}.Repositories") &&
+                    a.Name.EndsWith("Repository")
+                );
 
-            foreach (Type repository in allRepositories)
+            foreach (Type repository in allRepositores)
             {
-                if (repository.GetInterfaces().Contains(typeof(ITransientServiceInterface)))
+                Type mainInterface = repository.GetInterfaces().Where(i => !i.Name.Contains("IBaseRepository")).First();
+                
+                if (repository.GetInterfaces().Contains(typeof(ITransientRepositoryInterface)))
                 {
-                    Type mainInterface = repository.GetInterfaces()
-                        .Where(t => t.AssemblyQualifiedName != typeof(ITransientServiceInterface).AssemblyQualifiedName)
-                        .Where(i => !i.Name.Contains("IRepositoryBase"))
-                        .First();
-
                     services.AddTransient(mainInterface, repository);
                 }
-                else if (repository.GetInterfaces().Count() == 0)
+                else
                 {
-                    services.AddScoped(repository);
+                    services.AddScoped(mainInterface, repository);
                 }
             }
         }
