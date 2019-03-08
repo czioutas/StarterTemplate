@@ -23,7 +23,7 @@ namespace StarterTemplate.Controllers
                 bool _isItATeaPot = await _exampleService.IsItATeaPotAsync(new Models.ExampleModel { Id = Id });
                 return Ok(_isItATeaPot);
             }
-            catch (NotFoundException nt)
+            catch (NotFoundException)
             {
                 return NotFound();
             }

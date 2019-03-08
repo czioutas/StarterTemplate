@@ -4,6 +4,6 @@ namespace StarterTemplate.Repositories.Contracts
 {
     public interface IExampleRepository
     {
-        Task<string> GetNameForId(int modelId);
+        Task<string> GetNameForIdAsync(int modelId);
     }
 }

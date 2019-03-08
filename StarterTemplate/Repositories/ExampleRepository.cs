@@ -11,7 +11,7 @@ namespace StarterTemplate.Repositories
         {
         }
 
-        public async Task<string> GetNameForId(int modelId)
+        public async Task<string> GetNameForIdAsync(int modelId)
         {
             ExampleModel _model = await FirstByConditionAsync(a => a.Id == modelId);
 

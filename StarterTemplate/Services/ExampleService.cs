@@ -17,7 +17,7 @@ namespace StarterTemplate.Services
 
         public async Task<bool> IsItATeaPotAsync(ExampleModel model)
         {
-            string modelName = await _exampleRepository.GetNameForId(model.Id);
+            string modelName = await _exampleRepository.GetNameForIdAsync(model.Id);
 
             if (string.IsNullOrEmpty(modelName))
             {
